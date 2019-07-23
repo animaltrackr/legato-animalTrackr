@@ -24,4 +24,5 @@ bindings:
 {
     animalTrackr.positioningComponent.le_pos -> positioningService.le_pos
     animalTrackr.positioningComponent.le_posCtrl -> positioningService.le_posCtrl
+    animalTrackr.publisherComponent.le_data -> dataConnectionService.le_data
 }
