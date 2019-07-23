@@ -1,0 +1,27 @@
+sandboxed: true
+start: manual
+version: 0.2
+
+executables:
+{
+    animalTrackr = (publisherComponent positioningComponent)
+}
+
+processes:
+{
+    run:
+    {
+        ( animalTrackr )
+    }
+
+    envVars:
+    {
+        LE_LOG_LEVEL = DEBUG
+    }
+}
+
+bindings:
+{
+    animalTrackr.positioningComponent.le_pos -> positioningService.le_pos
+    animalTrackr.positioningComponent.le_posCtrl -> positioningService.le_posCtrl
+}

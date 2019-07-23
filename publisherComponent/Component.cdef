@@ -1,0 +1,17 @@
+cflags:
+{
+    -I${CURDIR}/../positioningComponent
+}
+
+requires:
+{
+    component:
+    {
+        positioningComponent
+    }
+}
+
+sources:
+{
+    publisher.c
+}
