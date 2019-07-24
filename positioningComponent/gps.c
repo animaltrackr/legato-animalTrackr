@@ -22,6 +22,7 @@ le_result_t mangOH_ReadGps(
     uint16_t monthReading;
     uint16_t dayReading;
 
+
     le_result_t res = le_pos_Get3DLocation(
         &latitudeReading,
         &longitudeReading,
@@ -53,7 +54,6 @@ le_result_t mangOH_ReadGps(
     }
     LE_ASSERT_OK(res);
 
-
     LE_ERROR_IF(fix == NULL, "Output variable is null");
 
     if (res == LE_OK) {
@@ -80,4 +80,9 @@ COMPONENT_INIT
 {
     le_posCtrl_ActivationRef_t posCtrlRef = le_posCtrl_Request();
     LE_FATAL_IF(posCtrlRef == NULL, "Couldn't activate positioning service");
+    le_result_t suplRes = le_gnss_SetSuplAssistedMode(LE_GNSS_MS_BASED_MODE);
+    if (suplRes != LE_OK) {
+        LE_WARN("Couldn't set A-GPS MS-Based mode, running in standalone");
+        LE_ASSERT_OK(le_gnss_SetSuplAssistedMode(LE_GNSS_STANDALONE_MODE));
+    }
 }

@@ -1,10 +1,30 @@
 sandboxed: true
 start: manual
-version: 0.2
+version: 0.3
 
 executables:
 {
     animalTrackr = (publisherComponent positioningComponent)
+}
+
+requires:
+{
+    file:
+    {
+        // needed for curl
+
+        /etc/localtime /etc/
+
+        /usr/lib/ssl/openssl.cnf /usr/lib/ssl/
+        /etc/nsswitch.conf /etc/
+        /etc/host.conf /etc/
+        /etc/hosts /etc/
+        /etc/resolv.conf /etc/
+
+        /lib/libnss_files.so.2 /lib/
+        /lib/libnss_dns.so.2 /lib/
+        /lib/libresolv.so.2 /lib/
+    }
 }
 
 processes:
@@ -24,5 +44,6 @@ bindings:
 {
     animalTrackr.positioningComponent.le_pos -> positioningService.le_pos
     animalTrackr.positioningComponent.le_posCtrl -> positioningService.le_posCtrl
+    animalTrackr.positioningComponent.le_gnss -> positioningService.le_gnss
     animalTrackr.publisherComponent.le_data -> dataConnectionService.le_data
 }
